@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Browser History Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">
+                    <i class="fas fa-history"></i>
+                    History Manager
+                </div>
+                <ul class="nav-links">
+                    <li><a href="#" data-section="home" class="nav-link active">Home</a></li>
+                    <li><a href="#" data-section="search" class="nav-link">Search</a></li>
+                    <li><a href="#" data-section="login" class="nav-link">Login</a></li>
+                    <li><a href="#" data-section="about" class="nav-link">About</a></li>
+                </ul>
+                <div class="nav-controls">
+                    <span id="userDisplay" class="user-display"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <div class="container">
+            <!-- Home Section -->
+            <section id="home" class="section active">
+                <div class="hero-section">
+                    <h1 class="hero-title">Browser History Manager</h1>
+                    <p class="hero-subtitle">Take control of your browsing history with our powerful and intuitive management tool</p>
+                </div>
+
+                <div class="card">
+                    <div class="stats-container">
+                        <div class="stat-item">
+                            <div class="stat-number" id="totalVisits">0</div>
+                            <div class="stat-label">Total Visits</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="uniqueUrls">0</div>
+                            <div class="stat-label">Unique URLs</div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-number" id="currentPosition">0</div>
+                            <div class="stat-label">Current Position</div>
+                        </div>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" id="homeSearchInput" placeholder="Search your history...">
+                        <button id="homeSearchBtn">
+                            <i class="fas fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+
+            </section>
+
+            <!-- Search Section -->
+            <section id="search" class="section">
+                <div class="card">
+                    <h1>Browser History</h1>
+                    <p>Manage your browsing history with the tools below.</p>
+
+                    <div class="url-input">
+                        <input type="text" id="urlInput" placeholder="Enter URL to visit...">
+                        <button id="visitBtn">
+                            <i class="fas fa-plus-circle"></i>
+                            Visit
+                        </button>
+                    </div>
+
+                    <div class="browser-controls">
+                        <button id="backBtn">
+                            <i class="fas fa-arrow-left"></i>
+                            Back
+                        </button>
+                        <button id="forwardBtn">
+                            <i class="fas fa-arrow-right"></i>
+                            Forward
+                        </button>
+                        <button id="clearBtn" class="danger">
+                            <i class="fas fa-trash"></i>
+                            Clear History
+                        </button>
+                    </div>
+
+                    <div class="toolbar">
+                        <div class="search-box" style="flex:1;margin-right:1rem;">
+                            <input type="text" id="searchInput" placeholder="Search in history...">
+                            <button id="searchBtn"><i class="fas fa-search"></i> Search</button>
+                        </div>
+
+                        <div class="sort-controls">
+                            <label for="sortSelect">Sort:</label>
+                            <select id="sortSelect">
+                                <option value="recent">Newest first</option>
+                                <option value="oldest">Oldest first</option>
+                                <option value="az">Alphabetical A→Z</option>
+                                <option value="za">Alphabetical Z→A</option>
+                                <option value="vis-high">Visits high→low</option>
+                                <option value="vis-low">Visits low→high</option>
+                            </select>
+                        </div>
+
+                        <div class="char-filter">
+                            <label for="charFilter">Starts with:</label>
+                            <input id="charFilter" maxlength="1" placeholder="a" style="width:44px;padding:6px;border-radius:8px;">
+                        </div>
+                    </div>
+
+                    <div id="searchResults" class="search-results"></div>
+
+                    <h2>Bookmarks</h2>
+                    <ul id="bookmarksList" class="history-list"></ul>
+
+                    <h2>History List</h2>
+                    <ul id="historyList" class="history-list"></ul>
+                </div>
+            </section>
+
+            <!-- Login Section -->
+            <section id="login" class="section">
+                <div class="card">
+                    <h1 id="authTitle">Login</h1>
+                    <p id="authSubtitle">Please login to access your personalized history management features.</p>
+
+                    <form id="loginForm" class="login-form">
+                        <div class="form-group">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" name="username" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" id="authSubmit">
+                                <i class="fas fa-sign-in-alt"></i>
+                                Login
+                            </button>
+                        </div>
+
+                        <div style="text-align:center;">
+                            <a href="#" id="toggleAuthMode">Don't have an account? Register</a>
+                        </div>
+                    </form>
+
+                    <div id="logoutBox" style="display:none;text-align:center;margin-top:1rem;">
+                        <button id="logoutBtn" class="danger">Logout</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- About Section -->
+            <section id="about" class="section">
+                <div class="card">
+                    <h1>About Browser History Manager</h1>
+                    <div class="about-content">
+                        <div class="about-text">
+                            <p>Browser History Manager is a powerful tool designed to help you take control of your browsing history. With our intuitive interface, you can easily track, search, and navigate through your visited pages.</p>
+                            
+                            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--primary-color);">Key Features</h3>
+                            <ul class="feature-list">
+                                <li>Track all your visited URLs with visit counts</li>
+                                <li>Search through your history quickly and efficiently</li>
+                                <li>Navigate back and forward through your browsing history</li>
+                                <li>Bookmark your favorite sites for quick access</li>
+                                <li>Sort and filter your history by various criteria</li>
+                                <li>Secure user authentication and personalized data storage</li>
+                            </ul>
+                            
+                            <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--primary-color);">How It Works</h3>
+                            <p>Our system stores your browsing history securely and allows you to manage it with ease. Simply login, visit URLs through our interface, and let us handle the rest. Your data is kept separate and secure for each user account.</p>
+                            
+                            <p style="margin-top: 1.5rem;"><strong>Note:</strong> This is a demonstration project showcasing history management capabilities. All data is stored locally in your browser.</p>
+                        </div>
+                        <div class="about-image">
+                            <img src="https://picsum.photos/seed/browserhistory/400/500.jpg" alt="Browser History Manager">
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Browser History Manager. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <div id="notification" class="notification">
+        <i class="fas fa-check-circle"></i>
+        <span id="notificationText"></span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
